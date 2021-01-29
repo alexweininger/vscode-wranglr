@@ -1,0 +1,237 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "fileTypes": [
+        "java"
+    ],
+    "injectionSelector": "L:comment.line.double-slash.java",
+    "name": "WrangLR",
+    "patterns": [
+        {
+            "captures": {
+                "1": {
+                    "name": "keyword.operator.grammer.wranglr"
+                },
+                "2": {
+                    "patterns": [
+                        {
+                            "include": "#grammar-symbols"
+                        },
+                        {
+                            "include": "#minijava-special-tokens"
+                        },
+                        {
+                            "include": "#minijava-reserved"
+                        },
+                        {
+                            "include": "#minijava-reserved-unused"
+                        },
+                        {
+                            "match": "`?\\S+",
+                            "name": "variable"
+                        }
+                    ]
+                },
+                "3": {
+                    "name": "keyword.operator.assignment.wranglr"
+                },
+                "4": {
+                    "name": "entity.rvalue.wranglr",
+                    "patterns": [
+                        {
+                            "include": "#keywords"
+                        },
+                        {
+                            "include": "#record-body"
+                        },
+                        {
+                            "include": "#numbers"
+                        },
+                        {
+                            "include": "#strings"
+                        },
+                        {
+                            "match": "\\w+",
+                            "name": "variable"
+                        }
+                    ]
+                }
+            },
+            "match": "(:)\\s+(`?\\S+\\s+)(::=)\\s+(.+)"
+        }
+    ],
+    "repository": {
+        "keywords": {
+            "patterns": [
+                {
+                    "include": "#minijava-reserved"
+                },
+                {
+                    "include": "#minijava-reserved-unused"
+                },
+                {
+                    "name": "keyword.operator.function.wranglr",
+                    "match": "=>"
+                },
+                {
+                    "name": "constant.other.position.wranglr",
+                    "match": "#"
+                },
+                {
+                    "name": "keyword.operator.zero-or-more.wranglr",
+                    "match": "\\*"
+                },
+                {
+                    "name": "keyword.operator.one-or-more.wranglr",
+                    "match": "\\*\\*"
+                },
+                {
+                    "name": "keyword.operator.range.wranglr",
+                    "match": "\\.\\."
+                },
+                {
+                    "match": "(!|&&|\\|\\|)",
+                    "name": "keyword.operator.logical.wranglr"
+                },
+                {
+                    "match": "(void|text|pass|append|prepend|null|emptyList|singleList)",
+                    "name": "variable.language"
+                }
+            ]
+        },
+        "numbers": {
+            "patterns": [
+                {
+                    "match": "(?x)\n\\b(?<!\\$)\n0(x|X)\n(\n  (?<!\\.)[0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?[Ll]?(?!\\.)\n  |\n  (\n    [0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?\\.?\n    |\n    ([0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?)?\\.[0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?\n  )\n  [Pp][+-]?[0-9]([0-9_]*[0-9])?[FfDd]?\n)\n\\b(?!\\$)",
+                    "name": "constant.numeric.hex.wranglr"
+                },
+                {
+                    "match": "\\b(?<!\\$)0(b|B)[01]([01_]*[01])?[Ll]?\\b(?!\\$)",
+                    "name": "constant.numeric.binary.wranglr"
+                },
+                {
+                    "match": "\\b(?<!\\$)0[0-7]([0-7_]*[0-7])?[Ll]?\\b(?!\\$)",
+                    "name": "constant.numeric.octal.wranglr"
+                },
+                {
+                    "match": "(?x)\n(?<!\\$)\n(\n  \\b[0-9]([0-9_]*[0-9])?\\.\\B(?!\\.)\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([0-9]([0-9_]*[0-9])?)([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b\n  |\n  (?<!\\.)\\B\\.[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b\n  |\n  \\b(0|[1-9]([0-9_]*[0-9])?)(?!\\.)[Ll]?\\b\n)\n(?!\\$)",
+                    "name": "constant.numeric.decimal.wranglr"
+                }
+            ]
+        },
+        "set-operators": {
+            "patterns": [
+                {
+                    "name": "keyword.operator.range.wranglr",
+                    "match": "\\.\\."
+                }
+            ]
+        },
+        "primitive-types": {
+            "match": "\\b(//:)\\b",
+            "name": "storage.type.primitive.wranglr"
+        },
+        "grammar": {
+            "patterns": [
+                {
+                    "include": "#keywords"
+                }
+            ]
+        },
+        "record-body": {
+            "match": "{(.*)?=}",
+            "captures": {
+                "0": {
+                    "name": "meta.set.body.wranglr"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#strings"
+                },
+                {
+                    "include": "#set-operators"
+                }
+            ],
+            "name": "meta.set.body.wranglr"
+        },
+        "minijava-special-tokens": {
+            "patterns": [
+                {
+                    "match": "`(!=|!|%|&&|\\(|\\)|\\*|\\+\\+|\\+|\\,|--|-|\\.|\\/|:|;|<=|<|==|=|>=|>|\\[|\\]|{|\\|\\||})",
+                    "name": "support.variable"
+                }
+            ]
+        },
+        "minijava-reserved-unused": {
+            "patterns": [
+                {
+                    "match": "`(abstract|assert|byte|case|catch|char|const|continue|default|double|do|enum|finally|final|float|goto|implements|import|interface|long|native|package|private|protected|short|static|strictfp|synchronized|throws|throw|transient|try|volatile)(?!\\w)",
+                    "name": "storage.modifier"
+                }
+            ]
+        },
+        "minijava-reserved": {
+            "patterns": [
+                {
+                    "match": "`(boolean|break|class|else|extends|false|for|if|instanceof|int|new|null|public|return|super|switch|this|true|void|while)(?!\\w)",
+                    "name": "constant"
+                }
+            ]
+        },
+        "grammar-symbols": {
+            "patterns": [
+                {
+                    "match": "(ID|INTLIT|STRINGLIT|CHARLIT)(?!\\w)",
+                    "name": "constant.language"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "begin": "\"",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.begin.wranglr"
+                        }
+                    },
+                    "end": "\"",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.end.wranglr"
+                        }
+                    },
+                    "name": "string.quoted.double.wranglr",
+                    "patterns": [
+                        {
+                            "match": "\\\\.",
+                            "name": "constant.character.escape.wranglr"
+                        }
+                    ]
+                },
+                {
+                    "begin": "'",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.begin.wranglr"
+                        }
+                    },
+                    "end": "'",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.end.wranglr"
+                        }
+                    },
+                    "name": "string.quoted.single.wranglr",
+                    "patterns": [
+                        {
+                            "match": "\\\\.",
+                            "name": "constant.character.escape.wranglr"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "scopeName": "source.wranglr"
+}
