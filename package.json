@@ -11,17 +11,10 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "wranglr",
-            "aliases": ["WrangLR", "wranglr"],
-            "extensions": [".wranglr", ".java"],
-            "configuration": "./language-configuration.json"
-        }],
         "grammars": [{
             "injectTo": [
                 "source.java"
             ],
-            "language": "wranglr",
             "scopeName": "source.wranglr",
             "path": "./syntaxes/wranglr.tmLanguage.json",
             "embeddedLanguages": {"meta.embedded.inline.wranglr": "wranglr"}
