@@ -1,8 +1,10 @@
 {
     "name": "vscode-wranglr",
-    "displayName": "vscode-wrangLR",
+    "displayName": "vscode-wranglr",
     "description": "WrangLR support for VS Code",
     "version": "0.0.1",
+    "publisher": "alexweininger",
+    "repository": "https://github.com/alexweininger/vscode-wranglr",
     "author": "Alex Weininger",
     "engines": {
         "vscode": "^1.52.0"
