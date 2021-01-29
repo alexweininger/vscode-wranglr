@@ -2,10 +2,24 @@
     "name": "vscode-wranglr",
     "displayName": "vscode-wranglr",
     "description": "WrangLR support for VS Code",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "alexweininger",
-    "repository": "https://github.com/alexweininger/vscode-wranglr",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/alexweininger/vscode-wranglr"
+    },
+    "homepage": "https://github.com/alexweininger/vscode-wranglr",
+    "galleryBanner": {
+        "color": "#3a3d41",
+        "theme": "dark"
+    },
+    "license": "MIT",
+    "keywords": [
+        "MiniJava",
+        "WrangLR"
+    ],
     "author": "Alex Weininger",
+    "bugs": "https://github.com/alexweininger/vscode-wranglr/issues",
     "engines": {
         "vscode": "^1.52.0"
     },
@@ -21,5 +35,8 @@
             "path": "./syntaxes/wranglr.tmLanguage.json",
             "embeddedLanguages": {"meta.embedded.inline.wranglr": "wranglr"}
         }]
+    },
+    "scripts": {
+        "package": "vsce package --baseContentUrl \"https://raw.githubusercontent.com/alexweininger/vscode-wranglr/main/\""
     }
 }
